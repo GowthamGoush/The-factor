@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/ic_background">
+
+    <EditText
+        android:id="@+id/input"
+        android:gravity="center"
+        android:layout_width="220dp"
+        android:layout_height="63dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:hint="Enter a number here..."
+        android:textSize="20dp"
+        android:background="@drawable/rounded_text4"
+        />
+
+    <TextView
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="The Factor"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textColor="#422626"
+        android:textSize="40dp"
+        android:textStyle="italic"
+        android:background="@drawable/rounded_text2"
+        />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:onClick="Onclick"
+        android:text="Enter"
+        android:textSize="20dp"
+        android:background="@drawable/rounded_button"/>
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:textColor="#DD2828"
+        android:textSize="20dp"
+        android:background="@drawable/rounded_text"/>
+
+</RelativeLayout>
