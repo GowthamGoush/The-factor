@@ -27,26 +27,48 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this,Main2Activity.class);
 
-        int number = Integer.parseInt(editText.getText().toString());
-        int d;
-        for(d=2;d<=number;d++){
+        Boolean enteredNumber;
+        String input = editText.getText().toString();
+        enteredNumber = numberOrNot(input);
+        if(enteredNumber==true) {
+            int number = Integer.parseInt(editText.getText().toString());
+            int d;
+            for (d = 2; d <= number; d++) {
 
-            if(number%d==0){
-                count1=count1+1;
+                if (number % d == 0) {
+                    count1 = count1 + 1;
+                }
             }
+            if (count1 == 0 || count1 == 1) {
+                textView.setEms(11);
+                textView.setText("Try with another number!");
+                count1 = 0;
+                return;
+            }
+            count1 = 0;
+
+            intent.putExtra(EXTRA_NUMBER, number);
+
+            startActivity(intent);
         }
-        if(count1==0 || count1==1){
-            textView.setEms(15);
-            textView.setText("Try with another number!");
-            count1=0;
-            return;
+        else {
+            textView.setEms(10);
+            textView.setText("Enter a valid input!");
         }
-        count1=0;
-
-        intent.putExtra(EXTRA_NUMBER,number);
-
-        startActivity(intent);
 
 
+    }
+
+    static boolean numberOrNot(String input)
+    {
+        try
+        {
+            Integer.parseInt(input);
+        }
+        catch(NumberFormatException ex)
+        {
+            return false;
+        }
+        return true;
     }
 }
