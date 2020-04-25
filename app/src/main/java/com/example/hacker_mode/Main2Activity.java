@@ -18,8 +18,9 @@ import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
     public static final String CURRENT_STREAK = "com.example.hacker_mode_CURRENT_STREAK";
-    int[] factor = new int[20];
-    int i,count=0,num1=0,num2=0,num3=0,x=0,y=0,z,ans;
+    long[] factor = new long[10];
+    int x=0,y=0,z;
+    long i,count=0,num1=0,num2=0,num3=0,ans;
     Random rnd = new Random();
     int answerClicked = 0;
     public int highScore = 0,currentScore=0;
@@ -65,12 +66,12 @@ public class Main2Activity extends AppCompatActivity {
         Button button3 = findViewById(R.id.button3);
 
         Intent intent = getIntent();
-        i = intent.getIntExtra(MainActivity.EXTRA_NUMBER,0);
+        i = intent.getLongExtra(MainActivity.EXTRA_NUMBER,0);
 
         final Intent intent2 = new Intent(this,Main3Activity.class);
 
         textView.setEms(15);
-        textView.setText("Find the factor of "+Integer.toString(i));
+        textView.setText("Find the factor of "+Long.toString(i));
 
         factor = Factor(i);
 
@@ -84,10 +85,9 @@ public class Main2Activity extends AppCompatActivity {
 
         Random rnd = new Random();
 
-        button1.setText(Integer.toString(num1));
-        button2.setText(Integer.toString(num2));
-        button3.setText(Integer.toString(num3));
-
+        button1.setText(Long.toString(num1));
+        button2.setText(Long.toString(num2));
+        button3.setText(Long.toString(num3));
         if(i%num1==0){
             ans=num1;
         }
@@ -163,7 +163,7 @@ public class Main2Activity extends AppCompatActivity {
                     textView1.setEms(8);
                     textView1.setText("Wrong Answer!");
                     textView2.setEms(15);
-                    textView2.setText("The correct answer is "+Integer.toString(ans));
+                    textView2.setText("The correct answer is "+Long.toString(ans));
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.red));
                     answerClicked = 1;
                     countDownTimer.cancel();
@@ -189,7 +189,7 @@ public class Main2Activity extends AppCompatActivity {
                     textView1.setEms(8);
                     textView1.setText("Wrong Answer!");
                     textView2.setEms(15);
-                    textView2.setText("The correct answer is "+Integer.toString(ans));
+                    textView2.setText("The correct answer is "+Long.toString(ans));
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.red));
                     answerClicked = 1;
                     countDownTimer.cancel();
@@ -202,7 +202,7 @@ public class Main2Activity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i%num3==0 && answerClicked==0){
+                  if(i%num3==0 && answerClicked==0){
                     textView1.setEms(8);
                     textView1.setText("Correct Answer!");
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.green));
@@ -215,7 +215,7 @@ public class Main2Activity extends AppCompatActivity {
                     textView1.setEms(8);
                     textView1.setText("Wrong Answer!");
                     textView2.setEms(15);
-                    textView2.setText("The correct answer is "+Integer.toString(ans));
+                    textView2.setText("The correct answer is "+Long.toString(ans));
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.red));
                     answerClicked = 1;
                     countDownTimer.cancel();
@@ -233,69 +233,61 @@ public class Main2Activity extends AppCompatActivity {
                 if(answerClicked==0) {
                     answerClicked = 0;
                     startActivity(intent3);
+                    countDownTimer.cancel();
                 }
             }
         });
 
     }
 
-    public int[] Factor(int f){
+    public long[] Factor(long f){
 
-        int[] fac;
-        fac = new int[20];
+        long[] fac;
+        fac = new long[10];
         int k;
 
-        for(k=2;k<=f;k++){
+        for(k=2;k<f;k++){
 
-            if(f%k==0 && count<20){
-                fac[count]=k;
+            if(count>9){
+                break;
+            }
+            if(f%k == 0){
+                fac[(int)count]=k;
                 count=count+1;
             }
         }
-        count=count-2;
+        count=count-1;
         return fac;
 
     }
 
-    public int generator(int num){
+    public long generator(int num){
 
         Random random = new Random();
 
         if(num==1){
-            int rnum=0;
-            rnum= factor[random.nextInt(count+1)];
+            long rnum=0;
+            rnum= factor[random.nextInt((int)count+1)];
             return rnum;
         }
         else if(num==2){
-            int rnum=0,m=0;
+            long rnum=0;
             while(rnum>=0){
-                rnum = random.nextInt(i)+2;
-                for(int l=0;l<=count;l++){
-                    if(rnum != factor[l]){
-                        m++;
-                    }
-                }
-                if(m==count+1){
+                rnum = (long)(Math.random()*(i))+2;
+                if(i%rnum != 0){
                     return rnum;
                 }
-                m=0;
             }
 
         }
         else if(num==3){
 
-            int rnum=0,m=0;
+            long rnum=0,m=0;
             while(rnum>=0){
-                rnum = random.nextInt(i)+2;
-                for(int l=0;l<=count;l++){
-                    if(rnum != factor[l]){
-                        m++;
-                    }
-                }
-                if(m==count+1){
+                rnum = (long)(Math.random()*(i))+2;
+                if(i%rnum != 0){
                     return rnum;
                 }
-                m=0;
             }
         }
         return 0;
@@ -362,4 +354,6 @@ public class Main2Activity extends AppCompatActivity {
         editor.putInt(CURRENT_SCORE,0);
         editor.apply();
     }
+
+
 }

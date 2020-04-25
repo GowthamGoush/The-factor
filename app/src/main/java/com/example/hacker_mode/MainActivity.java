@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.math.BigInteger;
+
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_NUMBER = "com.example.application.example.EXTRA_NUMBER";
     int count1=0;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         String input = editText.getText().toString();
         enteredNumber = numberOrNot(input);
         if(enteredNumber==true) {
-            int number = Integer.parseInt(editText.getText().toString());
+            long number = Long.parseLong(editText.getText().toString());
             int d;
             for (d = 2; d <= number; d++) {
 
@@ -47,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
             count1 = 0;
 
-            intent.putExtra(EXTRA_NUMBER, number);
-
+            intent.putExtra(MainActivity.EXTRA_NUMBER,number);
             startActivity(intent);
         }
         else {
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     {
         try
         {
-            Integer.parseInt(input);
+            Long.parseLong(input);
         }
         catch(NumberFormatException ex)
         {
